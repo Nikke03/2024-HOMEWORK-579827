@@ -1,6 +1,7 @@
 package it.uniroma3.diadia.comandi;
 
 import it.uniroma3.diadia.IO;
+import it.uniroma3.diadia.IOConsole;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
@@ -15,9 +16,9 @@ public class Prendi implements Comando {
 		super();
 		this.io = io;
 	}
+
 	@Override
 	public void esegui(Partita partita) {
-		// TODO Auto-generated method stub
 		Stanza stanzaCorrente = partita.getStanzaCorrente();
 		Borsa borsa = partita.getGiocatore().getBorsa();
 		if(stanzaCorrente.hasAttrezzo(nomeAttrezzo)) {
@@ -25,28 +26,30 @@ public class Prendi implements Comando {
 			if(borsa.addAttrezzo(attrezzoDaPrendere) == true) {
 				io.mostraMessaggio("Ho preso l'attrezzo " + nomeAttrezzo + " dalla stanza " + stanzaCorrente.getNome() + " e l'ho messo nella borsa");
 				stanzaCorrente.removeAttrezzo(attrezzoDaPrendere);
-		}
+			}
 			else
 				io.mostraMessaggio("la borsa va oltre il limite di peso!"); 
 		}
 		else 
-		io.mostraMessaggio("l'attrezzo " + nomeAttrezzo + " non e' nella stanza");
-		
-		
+			io.mostraMessaggio("l'attrezzo " + nomeAttrezzo + " non e' nella stanza");
 	}
 
 	@Override
 	public void setParametro(String parametro) {
-		// TODO Auto-generated method stub
 		this.nomeAttrezzo = parametro;
-		
 	}
-
+	
 	public String getNome() {
 		return this.nome;
 	}
 	
 	public String getParametro() {
 		return this.nomeAttrezzo;
+	}
+
+	@Override
+	public void setIo(IO io) {
+		// TODO Auto-generated method stub
+		
 	}
 }

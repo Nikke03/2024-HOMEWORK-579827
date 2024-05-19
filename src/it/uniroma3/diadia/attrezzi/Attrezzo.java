@@ -1,7 +1,7 @@
 package it.uniroma3.diadia.attrezzi;
 
 import it.uniroma3.diadia.ambienti.Stanza;
-
+import it.uniroma3.diadia.giocatore.Borsa;
 /**
  * Una semplice classe che modella un attrezzo.
  * Gli attrezzi possono trovarsi all'interno delle stanze
@@ -49,6 +49,17 @@ public class Attrezzo {
 	 */
 	public String toString() {
 		return this.getNome()+" ("+this.getPeso()+"kg)";
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		Attrezzo that = (Attrezzo)obj;
+		return this.getNome().equals(that.getNome()) && this.getPeso() == that.getPeso();
+	}
+	
+	@Override
+	public int hashCode() {
+		return this.getNome().hashCode() + this.getPeso();
 	}
 
 }

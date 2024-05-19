@@ -14,28 +14,34 @@ public class Aiuto implements Comando {
 		super();
 		this.io = io;
 	}
+	/**
+	 * Stampa informazioni di aiuto.
+	 */
 	@Override
 	public void esegui(Partita partita) {
-		// TODO Auto-generated method stub
 		int numeroComandi = elencoComandi.length;
 		for(int i=0; i< numeroComandi; i++) 
 			io.mostraMessaggio(elencoComandi[i]+" ");
 		io.mostraMessaggio("");
 
-		
 	}
+
 	@Override
 	public void setParametro(String parametro) {
 		// TODO Auto-generated method stub
-		
 	}
-
+	
 	public String getNome() {
 		return this.nome;
 	}
 	
 	public String getParametro() {
 		return null;
+	}
+	@Override
+	public void setIo(IO io) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	

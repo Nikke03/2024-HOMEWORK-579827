@@ -7,17 +7,16 @@ import org.junit.jupiter.api.Test;
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
-class StanzaTest {
-
+public class StanzaTest {
+	
 	private Stanza stanzaVuota;
 	private Stanza stanzaNonVuota;
 	private Attrezzo osso;
-	
+
 	@BeforeEach
-	void setup() {
-		
+	void setUp() { //collega le stanze per testare i metodi impostaStanzaAdiacente e getStanzaAdiacente
 		stanzaVuota = new Stanza("Stanza vuota");
-		stanzaNonVuota = new Stanza("Stanza non vuota");
+		stanzaNonVuota = new Stanza("Stanza non vuota"); 
 		osso = new Attrezzo("osso", 1);
 		stanzaNonVuota.addAttrezzo(osso);
 		this.stanzaVuota.impostaStanzaAdiacente("nord", this.stanzaNonVuota);
@@ -25,9 +24,17 @@ class StanzaTest {
 	}
 	
 	@Test
+	final void testImpostaStanzaAdiacente() {
+		assertTrue(this.stanzaVuota.impostaStanzaAdiacente("sud", this.stanzaNonVuota));
+	}
+
+	@Test
 	final void testHasAttrezzo() {
 		assertFalse(this.stanzaVuota.hasAttrezzo("osso"), "la stanza vuota non ha l'attrezzo");
 		assertTrue(this.stanzaNonVuota.hasAttrezzo("osso"), "la stanza vuota non ha l'attrezzo");
+		Attrezzo granata = new Attrezzo("granata", 1);
+		this.stanzaNonVuota.addAttrezzo(granata);
+		assertTrue(this.stanzaNonVuota.hasAttrezzo("granata"), "la stanza vuota non ha l'attrezzo");
 	}
 	
 	@Test
@@ -44,7 +51,8 @@ class StanzaTest {
 	
 	@Test
 	final void  testAddAttrezzo() {
-		assertTrue(this.stanzaNonVuota.addAttrezzo(osso));
+		assertTrue(this.stanzaVuota.addAttrezzo(osso));
 	}
 
 }
+

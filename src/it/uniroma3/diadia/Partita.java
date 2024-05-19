@@ -1,7 +1,7 @@
 package it.uniroma3.diadia;
-
 import it.uniroma3.diadia.ambienti.Labirinto;
 import it.uniroma3.diadia.ambienti.Stanza;
+
 import it.uniroma3.diadia.giocatore.Giocatore;
 
 /**
@@ -13,34 +13,43 @@ import it.uniroma3.diadia.giocatore.Giocatore;
  */
 
 public class Partita {
-public static IOConsole IO;
-	
-	private boolean finita;
+
+
+
 	private Labirinto labirinto;
 	private Giocatore giocatore;
-	private Stanza stanzaCorrente;
-	private Stanza stanzaVincente;
-	
-	/**
-	 * Costruttore classe Partita
-	 */
-	
-	public Partita(){
-		this.labirinto = new Labirinto();
+	private boolean finita;
+
+	public Partita(Labirinto labirinto){
+		this.labirinto = labirinto;
+		giocatore = new Giocatore();
+		//labirinto.creaStanze();
 		this.finita = false;
-		this.giocatore = new Giocatore();
-		this.stanzaCorrente = this.labirinto.getStanzaIniziale();
-		this.stanzaVincente = this.labirinto.getStanzaVincente();
-		
-		
 	}
-  
+
+	public Labirinto getLabirinto(){
+		return labirinto;
+	}
+
+	public void setLabirinto(Labirinto labirinto) {
+		this.labirinto = labirinto;
+	}
+
+
+	public Giocatore getGiocatore() {
+		return giocatore;
+	}
+
+	public void setGiocatore(Giocatore giocatore) {
+		this.giocatore = giocatore;
+	}
+
 	/**
 	 * Restituisce vero se e solo se la partita e' stata vinta
 	 * @return vero se partita vinta
 	 */
 	public boolean vinta() {
-		return this.stanzaCorrente == this.stanzaVincente;
+		return labirinto.getStanzaCorrente()== labirinto.getStanzaVincente();
 	}
 
 	/**
@@ -48,35 +57,7 @@ public static IOConsole IO;
 	 * @return vero se partita finita
 	 */
 	public boolean isFinita() {
-		return (finita || vinta() || (giocatore.getCfu() == 0));
-	}
-	
-	public Stanza getStanzaVincente() {
-		return stanzaVincente;
-	}
-
-	public void setStanzaCorrente(Stanza prossimaStanza) {
-		this.stanzaCorrente = prossimaStanza;
-	}
-
-	public Stanza getStanzaCorrente() {
-		return stanzaCorrente;
-	}
-	
-	public Giocatore getGiocatore() {
-		return this.giocatore;
-	}
-	
-	public Labirinto getLabirinto() {
-		return this.labirinto;
-	}
-	
-	public void setGiocatore(Giocatore giocatore) {
-		this.giocatore = giocatore;
-	}
-	
-	public void setLabirinto(Labirinto labirinto) {
-		this.labirinto = labirinto;
+		return finita || vinta() || (this.getGiocatore().getCfu() == 0);
 	}
 
 	/**
@@ -86,5 +67,18 @@ public static IOConsole IO;
 	public void setFinita() {
 		this.finita = true;
 	}
+
+	public boolean giocatoreIsVivo() {
+		return this.giocatore.getCfu()>0;
+	}
+	
+	public void setStanzaCorrente(Stanza stanzaCorrente) {
+		this.getLabirinto().setStanzaCorrente(stanzaCorrente);
 	}
 
+	public Stanza getStanzaCorrente() {
+		return this.getLabirinto().getStanzaCorrente();
+	}
+	
+
+}

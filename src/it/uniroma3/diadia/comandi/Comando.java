@@ -1,8 +1,6 @@
-
 package it.uniroma3.diadia.comandi;
 
-import java.util.Scanner;
-
+import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.Partita;
 
 /**
@@ -19,20 +17,31 @@ import it.uniroma3.diadia.Partita;
 
 public interface Comando {
 	
- public void esegui(Partita partita);
- 
- /**
-  * set parametro del comando
-  */
-  public void setParametro(String parametro);
-  public String getParametro();
-  public String getNome();
-    	 
+	/**
+	 * esecuzione del comando
+	 * @param partita
+	 */
+	public void esegui(Partita partita);
+	
+	/**
+	 * set parametro del comando
+	 * @param parametro
+	 */
+	public void setParametro(String parametro);
+	
+	public String getNome();
+	
+	public String getParametro();
+	
+	public void setIo(IO io);
+	
+}
+
 /*
+public class Comando {
+
     private String nome;
     private String parametro;
-    
-
 
     public Comando(String[] istruzione) {
 		int numeroParole = istruzione.length;
@@ -66,5 +75,6 @@ public interface Comando {
     public boolean sconosciuto() {
         return (this.nome == null);
     }
-    */
 }
+
+*/

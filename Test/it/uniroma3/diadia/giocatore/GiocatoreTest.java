@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
-class GiocatoreTest {
+public class GiocatoreTest {
 	private Giocatore giocatoreConBorsaVuota;
 	private Giocatore giocatoreConBorsaNonVuota;
 
@@ -43,4 +43,6 @@ class GiocatoreTest {
 		assertEquals("osso", giocatoreConBorsaNonVuota.getBorsa().getAttrezzo("osso"));
 	}
 	
+	
+
 }
