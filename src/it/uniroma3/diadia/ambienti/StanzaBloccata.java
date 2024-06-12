@@ -1,47 +1,32 @@
 package it.uniroma3.diadia.ambienti;
 
-public class StanzaBloccata extends Stanza{
-	private String direzioneBloccata;
-	private String attrezzoSbloccatore;
+public class StanzaBloccata extends Stanza {
 
-	public StanzaBloccata(String nome, String direzioneBloccata, String attrezzoSbloccatore) {
+	private Direzione direzioneBloccata;
+	private String attrezzoSbloccante;
+
+	public StanzaBloccata(String nome, Direzione direzioneBloccata, String attrezzoSbloccante) {
 		super(nome);
-		this.attrezzoSbloccatore = attrezzoSbloccatore;
 		this.direzioneBloccata = direzioneBloccata;
+		this.attrezzoSbloccante = attrezzoSbloccante;
 	}
-	
+
+
+
 	@Override
-	public Stanza getStanzaAdiacente(String direzione) {
-        Stanza stanza = null;
-        if(!this.hasAttrezzo(this.attrezzoSbloccatore))
-        	stanza = this;
-        else {
-        	stanza = super.getStanzaAdiacente(direzione);
-        }
-        return stanza;
+	public Stanza getStanzaAdiacente(Direzione direzione) {
+		if(direzioneBloccata.equals(direzione) && !this.hasAttrezzo(attrezzoSbloccante)) {
+			return this;
+		}
+		return super.getStanzaAdiacente(direzione);
 	}
-	
+
 	@Override
 	public String getDescrizione() {
-		return "Stanza bloccata in direzione: " + this.getDirezioneBloccata() + ", attrezzo sbloccante:" + this.getAttrezzoSbloccatore() + "\n" + super.getDescrizione();
-	}
+		String bloccata = "Stanza bloccata nella direzione: "+ direzioneBloccata+"\nPrendi il " + attrezzoSbloccante + " e posalo nella stanza";
 
-	public String getDirezioneBloccata() {
-		return direzioneBloccata;
+		if(!this.hasAttrezzo(attrezzoSbloccante))
+			return bloccata;
+		return super.getDescrizione();
 	}
-
-	public void setDirezioneBloccata(String direzioneBloccata) {
-		this.direzioneBloccata = direzioneBloccata;
-	}
-
-	public String getAttrezzoSbloccatore() {
-		return attrezzoSbloccatore;
-	}
-
-	public void setAttrezzoSbloccatore(String attrezzoSbloccatore) {
-		this.attrezzoSbloccatore = attrezzoSbloccatore;
-	}
-	
-	
-
 }

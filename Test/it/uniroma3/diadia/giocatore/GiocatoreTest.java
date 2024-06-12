@@ -1,48 +1,27 @@
 package it.uniroma3.diadia.giocatore;
+import static org.junit.Assert.*;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.Test;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import it.uniroma3.diadia.attrezzi.Attrezzo;
+import it.uniroma3.diadia.giocatore.Giocatore;
 
 public class GiocatoreTest {
-	private Giocatore giocatoreConBorsaVuota;
-	private Giocatore giocatoreConBorsaNonVuota;
-
-	private Borsa borsaVuota;
-	private Borsa borsaNonVuota;
-	private Attrezzo osso;
 	
-
-	@BeforeEach
-	void setUp(){
-		giocatoreConBorsaVuota = new Giocatore();
-		giocatoreConBorsaNonVuota = new Giocatore();
-		osso = new Attrezzo("osso", 1);
-		borsaVuota = new Borsa();
-		borsaNonVuota = new Borsa();
-		borsaNonVuota.addAttrezzo(osso);
-		this.giocatoreConBorsaNonVuota.setBorsa(borsaNonVuota);
-		this.giocatoreConBorsaVuota.setBorsa(borsaVuota);
-		
+	Giocatore g = new Giocatore();
+	
+	@Test
+	public void testGetCfuDefault() {
+		assertEquals(20, g.getCfu());
+	}
+	
+	@Test
+	public void testSetCfu() {
+		g.setCfu(3);
+		assertEquals(3, g.getCfu());
 	}
 
 	@Test
-	final void testGetCfu() {
-		assertTrue(giocatoreConBorsaVuota.getCfu() == 20);		
-		assertTrue(giocatoreConBorsaNonVuota.getCfu() == 20);		
+	public void testGetBorsaDefault() {
+		assertNotNull(g.getBorsa());
 	}
-	
-	final void testGetBorsaVuota() {
-		assertNull(giocatoreConBorsaVuota.getBorsa().getAttrezzo("osso"));
-	}
-	
-	final void testGetBorsaNonVuota() {
-		assertEquals("osso", giocatoreConBorsaNonVuota.getBorsa().getAttrezzo("osso"));
-	}
-	
-	
-
 }

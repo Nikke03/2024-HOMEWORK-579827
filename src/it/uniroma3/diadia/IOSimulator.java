@@ -7,56 +7,39 @@ public class IOSimulator implements IO {
 
 	private List<String> righeLette;
 	private int indiceRigheLette;
-	private List<String> messaggiProdotti;
-	private int indiceMessaggiProdotti;
-	private List<String> messaggiMostrati;
-	private int indiceMessaggiMostrati;
-
-	public IOSimulator(List<String> righeDaLeggere) {
-		this.righeLette = righeDaLeggere;
-		this.indiceRigheLette = 0;
-		this.messaggiMostrati = new ArrayList<String>();
-		this.indiceMessaggiMostrati = 0;
-		this.messaggiProdotti = new ArrayList<String>();
-		this.indiceMessaggiProdotti = 0;
-	}
 
 	public List<String> getMessaggiProdotti() {
-		return this.messaggiProdotti;
+		return messaggiProdotti;
 	}
 
 	public void setMessaggiProdotti(List<String> messaggiProdotti) {
 		this.messaggiProdotti = messaggiProdotti;
 	}
 
-	public List<String> getMessaggiMostrati() {
-		return this.messaggiMostrati;
-	}
+	//forse si potrebbe inserire una mappa al posto della lista per ricordare ogni riga letta quale messaggi abbia prodotto
+	private List<String> messaggiProdotti;
+	private int indiceMessaggiProdotti;
+	private int indiceMessaggiMostrati;
 
-	public void setMessaggiMostrati(List<String> messaggiMostrati) {
-		this.messaggiMostrati = messaggiMostrati;
-	}
-
-	public List<String> getRigheLette() {
-		return this.righeLette;
-	}
-
-	public void setRigheLette(List<String> righeLette) {
-		this.righeLette = righeLette;
+	public IOSimulator(List<String> righeDaLeggere) {
+		this.righeLette = righeDaLeggere;
+		this.indiceRigheLette = 0;
+		this.indiceMessaggiMostrati = 0;
+		this.messaggiProdotti = new ArrayList<String>();
 	}
 
 	@Override
 	public String leggiRiga() {
-		if (this.righeLette == null)
-			return null;
-		String riga = this.righeLette.get(indiceRigheLette);
+		String riga = null;
+
+		riga = this.righeLette.get(indiceRigheLette);
 		this.indiceRigheLette++;
 		return riga;
 	}
 
 	@Override
-	public void mostraMessaggio(String messaggio) {
-		this.messaggiProdotti.add(this.indiceMessaggiProdotti, messaggio);
+	public void mostraMessaggio(String msg) {
+		this.messaggiProdotti.add(this.indiceMessaggiProdotti, msg);
 		this.indiceMessaggiProdotti++;
 	}
 
@@ -70,11 +53,4 @@ public class IOSimulator implements IO {
 		return this.indiceMessaggiMostrati < this.indiceMessaggiProdotti;
 	}
 
-	@Override
-	public String toString() {
-		return "IOSimulator [righeLette=" + this.getRigheLette() + ", indiceRigheLette=" + this.indiceRigheLette
-				+ ", messaggiProdotti=" + this.getMessaggiProdotti() + ", indiceMessaggiProdotti="
-				+ this.indiceMessaggiProdotti + ", messaggiMostrati=" + this.getMessaggiMostrati()
-				+ ", indiceMessaggiMostrati=" + this.indiceMessaggiMostrati + "]";
-	}
 }
